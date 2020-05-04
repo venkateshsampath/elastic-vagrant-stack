@@ -1,12 +1,10 @@
 filebeat.inputs:
-    - type: log
-      paths:
-        - /etc/filebeat/sample.log
-    
-    processors:
-    - add_tags:
-        tags: [web, production]
-        target: "environment"
-    
-    output.logstash:
-      hosts: ["10.0.0.13:5044"]
+- type: log
+  paths:
+    - /var/log/messages
+processors:
+- add_tags:
+    tags: [web, vagrant]
+    target: "environment"
+output.logstash:
+  hosts: ["10.0.0.13:5044"]

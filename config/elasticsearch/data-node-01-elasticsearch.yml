@@ -1,9 +1,19 @@
-cluster.name: cluster-production
+cluster.name: cluster-vagrant
+
 node.name: es-data-01
-node.master: false
-node.data: false
-network.host: 10.0.0.14
+
+node.data: true
+
+network.host: [_local_, _site_]
+
 path.data: /var/lib/elasticsearch
 path.logs: /var/log/elasticsearch
+
 discovery.seed_hosts: ["10.0.0.11"]
 cluster.initial_master_nodes: ["es-master"]
+
+node.master: false
+node.ingest: false
+node.ml: false
+node.voting_only: false
+
