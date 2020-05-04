@@ -1,0 +1,9 @@
+cluster.name: cluster-production
+node.name: es-data-02
+node.master: false
+node.data: true
+network.host: 10.0.0.12
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+discovery.seed_hosts: ["10.0.0.11"]
+cluster.initial_master_nodes: ["es-master"]
