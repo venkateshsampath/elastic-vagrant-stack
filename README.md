@@ -1,8 +1,10 @@
 # elastic-vagrant-stack
-
+![ELK topology](elk-topology.png)
 ## Common Tools
+
+
 ```bash
-yum install -y telnet vim
+sudo yum install -y telnet vim
 
 sudo yum -y install java-1.8.0-openjdk
 
@@ -30,7 +32,9 @@ EOF
 sudo yum clean all
 sudo yum makecache
 ```
+
 ## Install ElasticSearch 7.x on ESMaster & ESData, ESData2 nodes
+
 ```bash
 sudo yum -y install elasticsearch
 
@@ -82,6 +86,7 @@ sudo systemctl enable filebeat
 sudo systemctl start filebeat
 sudo systemctl status filebeat
 ```
+
 ## Install Kibana
 
 ```bash
@@ -95,5 +100,3 @@ sudo systemctl start kibana
 sudo systemctl status kibana
 
 ```
-
-
