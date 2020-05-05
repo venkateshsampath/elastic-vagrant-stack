@@ -1,0 +1,17 @@
+cluster.name: dev
+
+node.name: data-1
+node.master: false
+node.data: true
+
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+
+network.host: [_local_, _site_]
+
+discovery.seed_hosts: ["10.0.0.10"]
+
+cluster.initial_master_nodes: ["master"]
+
+node.ml: false
+node.ingest: false

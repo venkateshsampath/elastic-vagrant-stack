@@ -1,0 +1,12 @@
+filebeat.inputs:
+- type: log
+  paths:
+    - /var/log/*.log
+
+processors:
+- add_tags:
+    tags: [web, production]
+    target: "environment"
+
+output.logstash:
+  hosts: ["10.0.0.13:5044"]
