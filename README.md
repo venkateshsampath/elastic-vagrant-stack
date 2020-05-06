@@ -1,33 +1,61 @@
 # elastic-vagrant-stack
-#### Elastic stack with single node elastic cluster in a single  VM
+
+### Elastic stack with single node elastic server in a single  VM
 ![ELK single node topology](elastic-stack-singlenode-topology.png)
 
-#### Elastic stack with 3 node elastic cluster in three differnet VMS
+#### NOTE: To provision a single-node elastic server
+
+We have to just run the ```vagrant up``` command.
+
+#### Elastic stack with 3 node elastic cluster in three differnet VMs
 ![ELK topology](elastic-stack-topology.png)
+
+#### NOTE: To provision a multi-node elastic cluster
+
+```
+export CLUSTER_TYPE=multi
+vagrant up
+```
+
 
 ## vagrant commands
 
 Status of each vagrant machine forming the Elastic stack topology can be checked using
 
 ```bash
-vagrant status
+$ vagrant status
+Current machine states:
+
+esserver                  not created (virtualbox)
+logstash-filebeat         not created (virtualbox)
+kibana                    not created (virtualbox)
 ```
+
 To create and provision the topology use below command
 ```bash
 vagrant up
 ```
 
-Advisable to run `vagrant status` again to check and ensure all the vagrant machines are running.
+Advisable to run `vagrant status` again to check and ensure all the vagrant machines are running. The result should be something like the following:
+```bash
+$ vagrant status
+Current machine states:
+
+esserver                  running (virtualbox)
+logstash-filebeat         running (virtualbox)
+kibana                    running (virtualbox)
+```
 
 Automatically elasticsearch cluster,kibana,logstash and filebeat will be configured and pipeline will be build for ready to use.
 
-Port forward is configured and Elasticsearch can be accessed from localhost using 
+### The elasticsearch server running within the ```guest``` VM can be reached from the ```host``` machine's browser using the following url:
 ```bash
-127.0.0.1:9200
+http://127.0.0.1:9200
 ```
-Port forward is configured and kibana can be access from localhost using 
+
+### The Kibana Dashboard can be viewed from the ```host``` machine's browser using the following url:
 ```bash
-127.0.0.1:5601
+http://127.0.0.1:5601
 ```
 
 
