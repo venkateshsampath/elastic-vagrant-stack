@@ -1,0 +1,8 @@
+cluster.name: elasticsearch-vagrant
+network.host: [_local_, _site_]
+discovery.type: single-node
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+
+
+

@@ -1,40 +1,58 @@
+
+single_node_server = true if ENV['CLUSTER_TYPE'] != 'multi'
+
 Vagrant.configure("2") do |config|
 
-  config.vm.define "esmaster" do |subconfig|
-    subconfig.vm.box = "centos/7"
-    subconfig.vm.hostname = "esmaster"
-    subconfig.vm.network :private_network, ip: "10.0.0.11"
-    subconfig.vm.network "forwarded_port", guest: 9200, host: 9200
-    subconfig.vm.provider "virtualbox" do |v|
-      v.memory = 1024
+  if single_node_server == true
+    config.vm.define "esserver" do |subconfig|
+      subconfig.vm.box = "centos/7"
+      subconfig.vm.hostname = "esserver"
+      subconfig.vm.network :private_network, ip: "10.0.0.11"
+      subconfig.vm.network "forwarded_port", guest: 9200, host: 9200
+      subconfig.vm.provider "virtualbox" do |v|
+        v.memory = 1024
+      end
+      subconfig.vm.provision "file", source: "./config/elasticsearch/single-node-elasticsearch.yml", destination: "~/elasticsearch.yml"
+      subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
+      subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-single-node.sh"
     end
-    subconfig.vm.provision "file", source: "./config/elasticsearch/master-node-elasticsearch.yml", destination: "~/elasticsearch.yml"
-    subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
-    subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-master.sh"
-  end
-
-  config.vm.define "esdata01" do |subconfig|
-    subconfig.vm.box = "centos/7"
-    subconfig.vm.hostname = "esdata01"
-    subconfig.vm.network :private_network, ip: "10.0.0.12"
-    subconfig.vm.provider "virtualbox" do |v|
-      v.memory = 512
+  else
+    config.vm.define "esmaster" do |subconfig|
+      subconfig.vm.box = "centos/7"
+      subconfig.vm.hostname = "esmaster"
+      subconfig.vm.network :private_network, ip: "10.0.0.11"
+      subconfig.vm.network "forwarded_port", guest: 9200, host: 9200
+      subconfig.vm.provider "virtualbox" do |v|
+        v.memory = 1024
+      end
+      subconfig.vm.provision "file", source: "./config/elasticsearch/master-node-elasticsearch.yml", destination: "~/elasticsearch.yml"
+      subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
+      subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-master.sh"
     end
-    subconfig.vm.provision "file", source: "./config/elasticsearch/data-node-01-elasticsearch.yml", destination: "~/elasticsearch.yml"
-    subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
-    subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-data-node-01.sh"
-  end
-
-  config.vm.define "esdata02" do |subconfig|
-    subconfig.vm.box = "centos/7"
-    subconfig.vm.hostname = "esdata02"
-    subconfig.vm.network :private_network, ip: "10.0.0.13"
-    subconfig.vm.provider "virtualbox" do |v|
-      v.memory = 512
+  
+    config.vm.define "esdata01" do |subconfig|
+      subconfig.vm.box = "centos/7"
+      subconfig.vm.hostname = "esdata01"
+      subconfig.vm.network :private_network, ip: "10.0.0.12"
+      subconfig.vm.provider "virtualbox" do |v|
+        v.memory = 512
+      end
+      subconfig.vm.provision "file", source: "./config/elasticsearch/data-node-01-elasticsearch.yml", destination: "~/elasticsearch.yml"
+      subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
+      subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-data-node-01.sh"
     end
-    subconfig.vm.provision "file", source: "./config/elasticsearch/data-node-02-elasticsearch.yml", destination: "~/elasticsearch.yml"
-    subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
-    subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-data-node-02.sh"
+  
+    config.vm.define "esdata02" do |subconfig|
+      subconfig.vm.box = "centos/7"
+      subconfig.vm.hostname = "esdata02"
+      subconfig.vm.network :private_network, ip: "10.0.0.13"
+      subconfig.vm.provider "virtualbox" do |v|
+        v.memory = 512
+      end
+      subconfig.vm.provision "file", source: "./config/elasticsearch/data-node-02-elasticsearch.yml", destination: "~/elasticsearch.yml"
+      subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
+      subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-data-node-02.sh"
+    end 
   end
 
   config.vm.define "logstash-filebeat" do |subconfig|
