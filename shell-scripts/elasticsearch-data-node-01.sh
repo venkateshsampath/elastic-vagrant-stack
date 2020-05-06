@@ -12,6 +12,6 @@ sudo systemctl daemon-reload && \
 sudo systemctl enable elasticsearch.service && \
 sudo systemctl start elasticsearch.service && \
 curl -s localhost:9200/_cat/nodes?v && \
-echo "esmaster setup Completed!"
+echo "esnode01 setup Completed!"
 
 

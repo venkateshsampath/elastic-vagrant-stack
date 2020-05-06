@@ -8,7 +8,6 @@ Vagrant.configure("2") do |config|
     subconfig.vm.provider "virtualbox" do |v|
       v.memory = 1024
     end
-
     subconfig.vm.provision "file", source: "./config/elasticsearch/master-node-elasticsearch.yml", destination: "~/elasticsearch.yml"
     subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
     subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-master.sh"
@@ -18,7 +17,9 @@ Vagrant.configure("2") do |config|
     subconfig.vm.box = "centos/7"
     subconfig.vm.hostname = "esdata01"
     subconfig.vm.network :private_network, ip: "10.0.0.12"
-
+    subconfig.vm.provider "virtualbox" do |v|
+      v.memory = 512
+    end
     subconfig.vm.provision "file", source: "./config/elasticsearch/data-node-01-elasticsearch.yml", destination: "~/elasticsearch.yml"
     subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
     subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-data-node-01.sh"
@@ -31,7 +32,6 @@ Vagrant.configure("2") do |config|
     subconfig.vm.provider "virtualbox" do |v|
       v.memory = 512
     end
-
     subconfig.vm.provision "file", source: "./config/elasticsearch/data-node-02-elasticsearch.yml", destination: "~/elasticsearch.yml"
     subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
     subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-data-node-02.sh"
@@ -41,6 +41,9 @@ Vagrant.configure("2") do |config|
     subconfig.vm.box = "centos/7"
     subconfig.vm.hostname = "logstash-filebeat"
     subconfig.vm.network :private_network, ip: "10.0.0.14"
+    subconfig.vm.provider "virtualbox" do |v|
+      v.memory = 512
+    end
     subconfig.vm.provision "file", source: "./config/logstash/logstash-pipeline.conf", destination: "~/logstash-pipeline.conf"
     subconfig.vm.provision "file", source: "./config/filebeat/filebeat.yml", destination: "~/filebeat.yml"
     subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
