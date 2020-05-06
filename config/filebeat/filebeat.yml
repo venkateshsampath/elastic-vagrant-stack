@@ -7,4 +7,4 @@ processors:
     tags: [web, vagrant]
     target: "environment"
 output.logstash:
-  hosts: ["10.0.0.13:5044"]
+  hosts: ["10.0.0.14:5044"]
