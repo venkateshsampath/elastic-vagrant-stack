@@ -48,11 +48,13 @@ Vagrant.configure("2") do |config|
     subconfig.vm.box = "centos/7"
     subconfig.vm.hostname = "kibana"
     subconfig.vm.network :private_network, ip: "10.0.0.15"
-    subconfig.vm.network "forwarded_port", guest: 9200, host: 9200
-    subconfig.vm.network "forwarded_port", guest: 5602, host: 5602
+    subconfig.vm.network "forwarded_port", guest: 5601, host: 5601
     subconfig.vm.provider "virtualbox" do |v|
       v.memory = 2048
       v.cpus = 2
     end
+    subconfig.vm.provision "file", source: "./config/kibana/kibana.yml", destination: "~/kibana.yml"
+    subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
+    subconfig.vm.provision "shell", path: "./shell-scripts/kibana.sh"
   end
 end
