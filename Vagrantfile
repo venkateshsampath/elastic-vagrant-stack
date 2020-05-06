@@ -24,6 +24,13 @@ Vagrant.configure("2") do |config|
     subconfig.vm.box = "centos/7"
     subconfig.vm.hostname = "esdata02"
     subconfig.vm.network :private_network, ip: "10.0.0.13"
+    subconfig.vm.provider "virtualbox" do |v|
+      v.memory = 512
+    end
+
+    subconfig.vm.provision "file", source: "./config/elasticsearch/data-node-02-elasticsearch.yml", destination: "~/elasticsearch.yml"
+    subconfig.vm.provision "shell", path: "./shell-scripts/common.sh"
+    subconfig.vm.provision "shell", path: "./shell-scripts/elasticsearch-data-node-02.sh"
   end
 
   config.vm.define "logstash-filebeat" do |subconfig|
