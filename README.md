@@ -95,6 +95,27 @@ ES master node is allocated 1 gb memory
 
 ---
 
+## Encrypt communication Elasticsearch cluster
+Generate a certificate and private key for each node signed by same CA and place under `config/certificates` folder.
+For temporary use  certificate `tmp-elasticsearch-certificate`  is already created and used in each node.
+
+Once the cluster is created,Generate password for all built in user.
+For interactive
+```bash
+bin/elasticsearch-setup-passwords interactive   
+```
+For auto
+```bash
+bin/elasticsearch-setup-passwords auto
+```
+Add the kibana generated password to `kibana.yml` file
+```bash
+elasticsearch.username: "kibana"
+elasticsearch.password: "{generated_password}"
+``` 
+Elastic cluster and kibanna can be reached using elastic credentials.
+
+
 
 
 
