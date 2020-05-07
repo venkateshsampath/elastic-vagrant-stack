@@ -115,9 +115,11 @@ elasticsearch.password: "{generated_password}"
 ``` 
 Elastic cluster and kibanna can be reached using elastic credentials.
 
+To enable logstash pipeline communicate to the secure elastic cluster
 
+update password for "elastic" user in logstash-pipeline.conf
 
-
-
-
-
+```bash
+user => elastic
+password => {password}
+```
