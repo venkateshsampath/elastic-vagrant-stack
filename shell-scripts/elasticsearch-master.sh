@@ -8,10 +8,10 @@ sudo cp "/home/vagrant/elasticsearch.yml" "/etc/elasticsearch/elasticsearch.yml"
 sudo sed -i 's/^\-Xms1g/\-Xms1024m/' /etc/elasticsearch/jvm.options
 sudo sed -i 's/^\-Xmx1g/\-Xmx1024m/' /etc/elasticsearch/jvm.options
 
+sudo cp "/vagrant/config/certificates/tmp-elasticsearch-certificate" "/etc/elasticsearch/"
+
 sudo systemctl daemon-reload && \
 sudo systemctl enable elasticsearch.service && \
 sudo systemctl start elasticsearch.service && \
 curl -s localhost:9200/_cat/nodes?v && \
 echo "esmaster setup Completed!"
-
-

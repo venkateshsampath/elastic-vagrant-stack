@@ -1,3 +1,6 @@
 server.port: 5601
 server.host: 0.0.0.0
 elasticsearch.hosts: ["http://10.0.0.11:9200"]
+
+# elasticsearch.username: "kibana"
+# elasticsearch.password: "{generated_password}"

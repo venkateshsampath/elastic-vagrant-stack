@@ -16,3 +16,9 @@ node.data: false
 node.ingest: false
 node.ml: false
 node.voting_only: false
+
+xpack.security.enabled: true
+xpack.security.transport.ssl.enabled: true
+xpack.security.transport.ssl.verification_mode: certificate 
+xpack.security.transport.ssl.keystore.path: tmp-elasticsearch-certificate
+xpack.security.transport.ssl.truststore.path: tmp-elasticsearch-certificate

@@ -8,6 +8,8 @@ sudo cp "/home/vagrant/elasticsearch.yml" "/etc/elasticsearch/elasticsearch.yml"
 sudo sed -i 's/^\-Xms1g/\-Xms512m/' /etc/elasticsearch/jvm.options
 sudo sed -i 's/^\-Xmx1g/\-Xmx512m/' /etc/elasticsearch/jvm.options
 
+sudo cp "/vagrant/config/certificates/tmp-elasticsearch-certificate" "/etc/elasticsearch/"
+
 sudo systemctl daemon-reload && \
 sudo systemctl enable elasticsearch.service && \
 sudo systemctl start elasticsearch.service && \
